@@ -1,0 +1,35 @@
+CREATE DATABASE IF NOT EXISTS testesPI;
+USE testesPI;
+
+CREATE TABLE eleitores( 
+id INT PRIMARY KEY AUTO_INCREMENT, 
+nome VARCHAR(100), 
+cpf VARCHAR(100) NOT NULL UNIQUE, 
+titulo CHAR(12) NOT NULL UNIQUE,
+mesario CHAR(2) NOT NULL, 
+chave_de_acesso VARCHAR(50) UNIQUE NOT NULL, 
+votou CHAR (2) NOT NULL
+); 
+
+CREATE TABLE candidatos(  
+Id INT PRIMARY KEY AUTO_INCREMENT, 
+Nome VARCHAR(100) NOT NULL, 
+Num_votação INT NOT NULL UNIQUE, 
+Partido VARCHAR(10) NOT NULL 
+); 
+
+CREATE TABLE votacao( 
+Id INT PRIMARY KEY AUTO_INCREMENT, 
+Candidato INT, 
+Quant_votos INT, 
+Datahora DATETIME, 
+Protocolo_votacao VARCHAR(20) 
+); 
+
+ALTER TABLE votacao 
+ADD FOREIGN KEY (Candidato) REFERENCES candidatos(id); 
+
+ 
+
+ 
+
