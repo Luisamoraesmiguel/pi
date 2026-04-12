@@ -1,3 +1,4 @@
+from validacoes.cpf import validar_cpf
 
 # ( !!! APENAS COMENTÁRIOS - APAGAR DEPOIS !!! )
 # Menus Feitos: Gerenciamento, Votação 
@@ -15,7 +16,16 @@ def principal():
     print("0- Sair")
 
     i=int(input("Escolha a Opção Desejada: "))
-    return i
+    if(i==0):
+        print("Encerrando o programa...")
+        exit()  
+    if(i==1):
+        gerenciamento() 
+    elif(i==2):
+        votacao()
+    else:
+        print("A opção escolhida é Inválida\n")
+    
     
  #====================================================   
 
@@ -47,11 +57,27 @@ def gerenciamento():
 def cadastro():
     print("\n== CADASTRO ==")
     print("0- Voltar")
+    print("1- Cadastrar Eleitor")
 
     i=int(input("Escolha a Opção Desejada: "))
 
     if(i==0):
         gerenciamento()
+    
+    elif(i==1):
+        nome = input("Digite o nome do eleitor: ")
+        cpf = ""
+        while not validar_cpf(cpf):
+            cpf = input("Digite o CPF do eleitor (apenas números): ")
+            if not validar_cpf(cpf):
+                print("CPF inválido. Por favor, tente novamente.")
+        titulo = input("Digite o número do título de eleitor: ")
+        mesario = input("O eleitor é mesário? (S/N): ")
+        print("Eleitor cadastrado com sucesso!")
+    
+    else:
+        print("A opção escolhida é Inválida\n")
+    
 
 def edicao():
     print("\n== EDIÇÃO ==")
@@ -143,3 +169,6 @@ def resultado():
 
     if(i==0):
         votacao()
+
+if __name__ == "__main__":
+    principal()
