@@ -1,6 +1,8 @@
 from validacoes.cpf import validar_cpf
 import criptografia 
 import random
+#add import do menu do banco de dados, quando for criado
+import
 
 # ( !!! APENAS COMENTÁRIOS - APAGAR DEPOIS !!! )
 # Menus Feitos: Gerenciamento, Votação 
