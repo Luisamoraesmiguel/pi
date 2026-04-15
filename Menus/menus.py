@@ -1,4 +1,6 @@
 from validacoes.cpf import validar_cpf
+import criptografia 
+import random
 
 # ( !!! APENAS COMENTÁRIOS - APAGAR DEPOIS !!! )
 # Menus Feitos: Gerenciamento, Votação 
