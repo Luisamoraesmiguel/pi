@@ -1,35 +1,44 @@
 import mysql.connector
 
-def cadastrar_eleitor(nome, titulo):
+def cadastrar_eleitor(nome, titulo, cpf):
+    """
+    Funcao que envia os dados do eleitor para o banco de dados.
+
+    Args:
+        nome (str): Nome do eleitor.
+        titulo (str): Numero do titulo.
+        cpf (str): Numero do CPF.
+
+    Returns:
+        int: Retorna 1 se deu certo ou 0 se deu erro.
+    """
     try:
-        # 1. Conectar ao banco (as informações vêm do arquivo .sql que vocês têm)
+        # Tenta conectar ao banco de dados
         conexao = mysql.connector.connect(
             host="localhost",
-            user="root",      
-            password="Beatriz190524",
-            database="tabela_bd"    
+            user="root",
+            password="", # Se tiver senha, coloque aqui
+            database="tabela_bd"
         )
         
         cursor = conexao.cursor()
 
-        # 2. O comando para inserir no banco
-        comando = "INSERT INTO eleitores (nome, titulo) VALUES (%s, %s)"
-        valores = (nome, titulo)
+        # Comando para inserir os dados na tabela
+        comando = "INSERT INTO eleitores (nome, titulo, cpf) VALUES (%s, %s, %s)"
+        valores = (nome, titulo, cpf)
 
         cursor.execute(comando, valores)
         conexao.commit() 
         
-        print("Eleitor cadastrado com sucesso!")
+        print("Cadastro realizado!")
         return 1
 
     except Exception as erro:
-        print(f"Erro ao cadastrar: {erro}")
+        print(f"Erro: {erro}")
         return 0
 
     finally:
-        # Sempre fechar a conexão para não travar o banco
-        if conexao.is_connected():
+        # Fecha a conexao para nao travar o banco
+        if 'conexao' in locals() and conexao.is_connected():
             cursor.close()
             conexao.close()
-
-cadastrar_eleitor ("Beatriz Teste","12345678")
