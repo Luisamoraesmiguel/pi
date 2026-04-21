@@ -1,4 +1,4 @@
-def validar_titulo_eleitor(titulo_n):
+def verificar_titulo(titulo_n):
     """
     Realiza a validação do formato do título de eleitor.
     

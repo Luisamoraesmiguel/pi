@@ -1,8 +1,8 @@
 
-from validacoes.cpf import validar_cpf
-from validacoes.titulo import verificar_titulo
+from Códigos_fonte.validacoes.cpf import validar_cpf
+from Códigos_fonte.validacoes.titulo import verificar_titulo
 import Criptografia 
-import cadastro as acao_cadastro
+import Códigos_fonte.cadastro as acao_cadastro
 import random
 #add import do menu do banco de dados, quando for criado
 from validacoes import titulo
