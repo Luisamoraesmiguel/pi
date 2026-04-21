@@ -31,7 +31,7 @@ def cifrar(texto):
         
     return "".join(chr(n) for n in resultado)
 #para testar, apagar depois!!!!
-cpf=str(input("Digite o CPF: "))
-resultado = cifrar(cpf)
-print("Lista de números gerados:", [ord(c) for c in resultado])
-print("Tamanho total:", len(resultado))
+#cpf=str(input("Digite o CPF: "))
+#resultado = cifrar(cpf)
+#print("Lista de números gerados:", [ord(c) for c in resultado])
+#print("Tamanho total:", len(resultado))
