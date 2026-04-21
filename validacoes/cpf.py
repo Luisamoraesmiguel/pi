@@ -24,6 +24,8 @@ def validar_cpf(cpf):
             digito1 = 0
         else:
             digito1 = resultado
+
+            
 # Calculo do segundo digito
     soma = 0
     soma += int (cpf[0]) * 11

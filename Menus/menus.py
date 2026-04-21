@@ -1,8 +1,11 @@
+
 from validacoes.cpf import validar_cpf
-import criptografia 
+from validacoes.titulo import verificar_titulo
+import Criptografia 
+import cadastro as acao_cadastro
 import random
 #add import do menu do banco de dados, quando for criado
-import
+from validacoes import titulo
 
 # ( !!! APENAS COMENTÁRIOS - APAGAR DEPOIS !!! )
 # Menus Feitos: Gerenciamento, Votação 
@@ -70,16 +73,24 @@ def cadastro():
     
     elif(i==1):
         nome = input("Digite o nome do eleitor: ")
+        titulo = ""
         cpf = ""
+        mesario = input("O eleitor é mesário? (S/N): ")
+        while mesario not in ['S', 'N']:
+            print("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.")
+            mesario = input("O eleitor é mesário? (S/N): ")
         while not validar_cpf(cpf):
             cpf = input("Digite o CPF do eleitor (apenas números): ")
             if not validar_cpf(cpf):
                 print("CPF inválido. Por favor, tente novamente.")
-        titulo = input("Digite o número do título de eleitor: ")
-        mesario = input("O eleitor é mesário? (S/N): ")
-        print("Eleitor cadastrado com sucesso!")
-        cpf_cifrado = criptografia.cifrar(cpf)
-        sucesso = banco.cadastrar_eleitor(nome, titulo, cpf_cifrado)
+
+        while not verificar_titulo(titulo):
+             titulo = input("Digite o número do título de eleitor: ")
+             if not verificar_titulo(titulo):
+                print("Título de eleitor inválido. Por favor, tente novamente.")
+        
+        cpf_cifrado = Criptografia.cifrar(cpf)
+        sucesso = acao_cadastro.cadastrar_eleitor(nome, titulo, cpf_cifrado)
         if sucesso == 1:
             print("\nEleitor cadastrado e criptografado com sucesso!")
         else:

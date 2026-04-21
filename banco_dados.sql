@@ -36,7 +36,8 @@ MODIFY Candidato INT NOT NULL;
 
 
 ALTER TABLE eleitores
-MODIFY mesario CHAR(2) NOT NULL CHECK (mesario IN ('S', 'N'));
+MODIFY mesario CHAR(1) NOT NULL CHECK (mesario IN ('S', 'N'));
 
 ALTER TABLE eleitores
-MODIFY votou CHAR(2) NOT NULL CHECK (votou IN ('S', 'N'));
+MODIFY votou CHAR(1) NOT NULL CHECK (votou IN ('S', 'N'));
+
