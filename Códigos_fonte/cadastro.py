@@ -1,6 +1,6 @@
 import mysql.connector
 
-def cadastrar_eleitor(nome, titulo, cpf):
+def cadastrar_eleitor(nome, titulo, cpf_cifrado, mesario):
     """
     Funcao que envia os dados do eleitor para o banco de dados.
 
@@ -24,8 +24,8 @@ def cadastrar_eleitor(nome, titulo, cpf):
         cursor = conexao.cursor()
 
         # Comando para inserir os dados na tabela
-        comando = "INSERT INTO eleitores (nome, titulo, cpf) VALUES (%s, %s, %s)"
-        valores = (nome, titulo, cpf)
+        comando = "INSERT INTO eleitores (nome, titulo, cpf, mesario) VALUES (%s, %s, %s, %s)"
+        valores = (nome, titulo, cpf_cifrado, mesario)
 
         cursor.execute(comando, valores)
         conexao.commit() 

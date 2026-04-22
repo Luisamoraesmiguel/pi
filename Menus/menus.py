@@ -32,6 +32,7 @@ def principal():
         votacao()
     else:
         print("A opção escolhida é Inválida\n")
+    return i
     
     
  #====================================================   
@@ -84,13 +85,22 @@ def cadastro():
             if not validar_cpf(cpf):
                 print("CPF inválido. Por favor, tente novamente.")
 
-        while not verificar_titulo(titulo):
+        titulo_valido = False
+        while not titulo_valido:
              titulo = input("Digite o número do título de eleitor: ")
-             if not verificar_titulo(titulo):
+             if verificar_titulo(titulo):
+                titulo_valido = True
+                print("Título de eleitor válido.")
+             else:
                 print("Título de eleitor inválido. Por favor, tente novamente.")
-        
+                
+        print('Nome:', nome)
+        print('Título:', titulo)
+        print('CPF:', cpf)
+        print('Mesário:', mesario)
+
         cpf_cifrado = Criptografia.cifrar(cpf)
-        sucesso = acao_cadastro.cadastrar_eleitor(nome, titulo, cpf_cifrado)
+        sucesso = acao_cadastro.cadastrar_eleitor(nome, titulo, cpf_cifrado, mesario)
         if sucesso == 1:
             print("\nEleitor cadastrado e criptografado com sucesso!")
         else:
