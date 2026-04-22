@@ -22,13 +22,16 @@ def verificar_titulo(titulo):
     # Regra especial SP (01) e MG (02): resto 0 → DV = 1
     if resto1 == 10:
         primeiro_dv = 0
+
     elif resto1 == 0:
         if uf in (1, 2):
             primeiro_dv = 1
         else:
             primeiro_dv = 0
+
     else:
         primeiro_dv = resto1
+        
     if dv1 != primeiro_dv:
         return False
 
