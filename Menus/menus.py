@@ -6,7 +6,7 @@ import Códigos_fonte.cadastro as acao_cadastro
 from Códigos_fonte.validacoes.mesario import verificar_mesario
 from Códigos_fonte.zerezima import zerezima 
 from remover_eleitor import apagar_eleitor_do_banco as remover_eleitor
-import mysql.connector  
+
 import time
 import chave
 import os # para limpar a tela, se necessário
@@ -85,6 +85,7 @@ def cadastro():
         nome = input("Digite o nome completo do eleitor: ")
         titulo = ""
         cpf = ""
+        votou = 'N'
         mesario = input("O eleitor é mesário? (S/N): ")
         while mesario not in ['S', 'N']:
             print("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.")
@@ -113,6 +114,7 @@ def cadastro():
 
         cpf_cifrado = Criptografia.cifrar(cpf)
         sucesso = acao_cadastro.cadastrar_eleitor(nome, titulo, cpf_cifrado, mesario)
+
         if sucesso == 1:
             print("\nEleitor cadastrado e criptografado com sucesso!")
         else:
@@ -222,6 +224,7 @@ def abertura_votacao():
         elif votacao == 'N' or votacao == 'n':
             print("retornando para menu do sistema de votação...")
             sistema_votacao()
+
         while votacao != 'S' and votacao != 'N' and votacao != 's' and votacao != 'n':
             print("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.")
             votacao = input("Deseja continuar o processo de votação? (S/N): ")
