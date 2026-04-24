@@ -31,7 +31,7 @@ def principal():
     if(i==1):
         gerenciamento() 
     elif(i==2):
-        votacao()
+        sistema_votacao()
     else:
         print("A opção escolhida é Inválida\n")
     return i
@@ -193,7 +193,7 @@ def abertura_votacao():
         while votacao != 'S' and votacao != 'N' and votacao != 's' and votacao != 'n':
             print("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.")
             votacao = input("Deseja continuar o processo de votação? (S/N): ")
-            
+
             
 def menu_votacao():
     os.system('clear')  # Limpa a tela para melhor visualização
@@ -202,23 +202,30 @@ def menu_votacao():
     print("2- Encerrar Votação")
     print("0- Voltar")
         
-        i=int(input("Escolha a Opção Desejada: "))
+    i=int(input("Escolha a Opção Desejada: "))
 
-        if(i==0):
-            sistema_votacao()
+    if(i==0):
+        sistema_votacao()
 
-        elif(i==1):
-            votacao()
+    elif(i==1):
+        votacao()
 
-        elif(i==2):
-            encerramento_votacao()
+    elif(i==2):
+        encerramento_votacao()
 
 #== VOTACAO == 
 def votacao():
+    print("\n== VOTAÇÃO ==")
+    print("1- Votar")
+    pass
 
 #== ENCERRAMENTO DA VOTAÇÃO ===
 def encerramento_votacao():
-
+    print("\nEncerrando a votação...")
+    time.sleep(2)  # Simula o processo de encerramento
+    print("Votação encerrada com sucesso!")
+    input("Pressione Enter para retornar ao menu do sistema de votação.")
+    sistema_votacao()
 
 
 #== AUDITORIA ===
