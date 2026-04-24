@@ -5,6 +5,8 @@ import Criptografia
 import Códigos_fonte.cadastro as acao_cadastro
 from Códigos_fonte.validacoes.mesario import verificar_mesario
 from Códigos_fonte.zerezima import zerezima 
+from remover_eleitor import apagar_eleitor_do_banco as remover_eleitor
+import mysql.connector  
 import time
 import os # para limpar a tela, se necessário
 #import random
@@ -119,11 +121,27 @@ def cadastro():
 def edicao():
     print("\n== EDIÇÃO ==")
     print("0- Voltar")
+    print("1- Remover Eleitor")
 
     i=int(input("Escolha a Opção Desejada: "))
 
     if(i==0):
         gerenciamento()
+    elif(i==1):
+        remove_titulo = input("Digite o número do título de eleitor do eleitor que deseja remover: ")
+        confirmacao = input(f"Tem certeza que deseja remover o eleitor com título {remove_titulo}? (S/N): ")
+        
+        while confirmacao not in ['S','s','n','N']:
+            print("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.")
+            confirmacao = input(f"Tem certeza que deseja remover o eleitor com título {remove_titulo}? (S/N): ")
+        
+        if confirmacao in ['S','s']:
+            remover_eleitor(remove_titulo)
+        else:
+            print("Operação de remoção cancelada. Retornando ao menu de edição...")
+            edicao()    
+
+
 
 def busca():
     print("\n== Busca ==")

@@ -1,10 +1,8 @@
 import mysql.connector
 
 def apagar_eleitor_do_banco(titulo_digitado):
-    """
-    Remove um eleitor da tabela usando o numero do titulo.
-    """
-    try:
+        
+    #try:    
         # 1. Abre a conexao (Use a sua senha aqui!)
         conexao = mysql.connector.connect(
             host="localhost",
@@ -20,12 +18,13 @@ def apagar_eleitor_do_banco(titulo_digitado):
 
         # 3. Salva a mudanca
         conexao.commit()
-        print("Sucesso: Comando de remocao enviado!")
+        print(f"\n[SUCESSO] Eleitor com título {titulo_digitado} removido com sucesso!")
 
-    except Exception as e:
-        print(f"Erro ao remover: {e}")
+    #except Exception as e:
+        #print(f"Erro ao remover: {e}")
 
-    finally:
-        if conexao.is_connected():
-            conexao.close()
+    #finally:
+        #if conexao.is_connected():
+        cursor.close() # Fecha o cursor
+        conexao.close()
 
