@@ -1,7 +1,7 @@
 def verificar_titulo(titulo):
     titulo = str(titulo).strip()  # Remove espaços em branco
     titulo = ''.join(filter(str.isdigit, titulo))  # Remove caracteres não numéricos
-    if len(titulo) != 12 and titulo.isdigit():
+    if len(titulo) != 12 or not titulo.isdigit():
             return False
    #Separar as partes  
     sequencial = titulo[:8]   # 8 primeiros dígitos

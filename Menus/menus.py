@@ -30,17 +30,15 @@ def principal():
     print("0- Sair")
 
     i=int(input("Escolha a Opção Desejada: "))
-    if(i==0):
-        print("Encerrando o programa...")
-        exit()  
+    
     if(i==1):
-        gerenciamento() 
+        gerenciamento()
     elif(i==2):
         sistema_votacao()
-    else:
+    elif(i!=0):
         print("A opção escolhida é Inválida\n")
-    return i
     
+    return i
     
  #====================================================   
 
@@ -57,6 +55,7 @@ def gerenciamento():
 
     i=int(input("Escolha a Opção Desejada: "))
 
+
     if(i==1):
         cadastro()
     elif(i==2):
@@ -68,8 +67,8 @@ def gerenciamento():
     
     elif(i==0):
         principal()
+    return i
     
-
 
 def cadastro():
     print("\n== CADASTRO ==")
@@ -82,20 +81,20 @@ def cadastro():
         gerenciamento()
     
     elif(i==1):
-        nome = input("Digite o nome completo do eleitor: ")
+        nome = input("Digite o nome completo do eleitor: ").upper().strip()  # Converte para maiúsculas e remove espaços extras 
         titulo = ""
         cpf = ""
         votou = 'N'
-        mesario = input("O eleitor é mesário? (S/N): ")
-        while mesario not in ['S', 'N']:
-            print("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.")
-            mesario = input("O eleitor é mesário? (S/N): ")
+        mesario = input("O eleitor é mesário? (S/N): ").upper().strip()  # Converte para maiúsculas e remove espaços extras
+        #while mesario not in ['S', 'N']:
+            #print("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.")
+            #mesario = input("O eleitor é mesário? (S/N): ")
         while not validar_cpf(cpf):
             cpf = input("Digite o CPF do eleitor (apenas números): ")
             if not validar_cpf(cpf):
                 print("CPF inválido. Por favor, tente novamente.")
 
-        titulo_valido = False
+        titulo_valido = False # Inicializa a variável de controle para o loop de validação do título
         while not titulo_valido:
              titulo = input("Digite o número do título de eleitor: ")
              if verificar_titulo(titulo):
@@ -113,7 +112,7 @@ def cadastro():
         print('Senha: ',senha)
 
         cpf_cifrado = Criptografia.cifrar(cpf)
-        sucesso = acao_cadastro.cadastrar_eleitor(nome, titulo, cpf_cifrado, mesario)
+        sucesso = acao_cadastro.cadastrar_eleitor(nome, cpf_cifrado, titulo, mesario, votou, senha)
 
         if sucesso == 1:
             print("\nEleitor cadastrado e criptografado com sucesso!")
@@ -182,6 +181,7 @@ def sistema_votacao():
 
     i=int(input("Escolha a Opção Desejada: "))
 
+
     if(i==1):
         abertura_votacao()
     elif(i==2):
@@ -190,6 +190,8 @@ def sistema_votacao():
         resultado()
     elif(i==0):
         principal()
+
+    return i
 
 
 #=== ABERTURA DA VOTAÇÃO ===
@@ -200,7 +202,7 @@ def abertura_votacao():
         #Validação do mesário
         print("\n IDENTIFICAÇÃO DO MESÁRIO")
         titulo= input("Digite o número do título de eleitor do mesário: ")
-        cpf = input("Digite o CPF do mesário: ")
+        cpf = input("Digite os 4 ultimos digitos do CPF do mesário: ")
         chave = input("Digite a chave de acesso do mesário: ")
         
         while not verificar_mesario(titulo, cpf, chave):
@@ -239,6 +241,7 @@ def menu_votacao():
         
     i=int(input("Escolha a Opção Desejada: "))
 
+
     if(i==0):
         sistema_votacao()
 
@@ -247,6 +250,9 @@ def menu_votacao():
 
     elif(i==2):
         encerramento_votacao()
+
+    return i
+    
 
 #== VOTACAO == 
 def votacao():
