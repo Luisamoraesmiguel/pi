@@ -1,17 +1,12 @@
 
-from Códigos_fonte.validacoes.cpf import validar_cpf
-from Códigos_fonte.validacoes.titulo import verificar_titulo
-import Criptografia 
-import Códigos_fonte.cadastro as acao_cadastro
-from Códigos_fonte.validacoes.mesario import verificar_mesario
-from Códigos_fonte.zerezima import zerezima 
 from Códigos_fonte.edicao.remover_eleitor import apagar_eleitor_do_banco as remover_eleitor
 from Códigos_fonte.edicao.eleitor import editar_eleitor
 from Códigos_fonte.edicao.candidato import editar_candidato
 from Códigos_fonte.cadastro import cadastrar_candidato
 from Códigos_fonte.edicao.rever_chave import rever_chave_acesso
+from Códigos_fonte.cadastro import cadastrar_eleitor
+from Votacao.Abertura import abertura_votacao
 import time
-import chave
 import os # para limpar a tela, se necessário
 #import random
 #add import do menu do banco de dados, quando for criado
@@ -85,44 +80,8 @@ def cadastro():
         gerenciamento()
     
     elif(i==1):
-        nome = input("Digite o nome completo do eleitor: ").upper().strip()  # Converte para maiúsculas e remove espaços extras 
-        titulo = ""
-        cpf = ""
-        votou = 'N'
-        mesario = input("O eleitor é mesário? (S/N): ").upper().strip()  # Converte para maiúsculas e remove espaços extras
-        #while mesario not in ['S', 'N']:
-            #print("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.")
-            #mesario = input("O eleitor é mesário? (S/N): ")
-        while not validar_cpf(cpf):
-            cpf = input("Digite o CPF do eleitor (apenas números): ")
-            if not validar_cpf(cpf):
-                print("CPF inválido. Por favor, tente novamente.")
-
-        titulo_valido = False # Inicializa a variável de controle para o loop de validação do título
-        while not titulo_valido:
-             titulo = input("Digite o número do título de eleitor: ")
-             if verificar_titulo(titulo):
-                titulo_valido = True
-                print("Título de eleitor válido.")
-             else:
-                print("Título de eleitor inválido. Por favor, tente novamente.")
+        cadastrar_eleitor()
         
-        senha = chave.gerar_chave(nome)
-                
-        print('Nome:', nome)
-        print('Título:', titulo)
-        print('CPF:', cpf)
-        print('Mesário:', mesario)
-        print('Senha: ',senha)
-
-        cpf_cifrado = Criptografia.cifrar(cpf)
-        sucesso = acao_cadastro.cadastrar_eleitor(nome, cpf_cifrado, titulo, mesario, votou, senha)
-
-        if sucesso == 1:
-            print("\nEleitor cadastrado e criptografado com sucesso!")
-        else:
-            print("\nErro ao salvar no banco de dados.")
-
     elif(i==2):
         cadastrar_candidato()
     
@@ -213,49 +172,7 @@ def sistema_votacao():
     return i
 
 
-#=== ABERTURA DA VOTAÇÃO ===
-def abertura_votacao():
-        os.system('clear')  # Limpa a tela para melhor visualização
-        print("\n== ABERTURA DO SISTEMA DE VOTAÇÃO ==")
 
-        #Validação do mesário
-        print("\n IDENTIFICAÇÃO DO MESÁRIO")
-        titulo= input("Digite o número do título de eleitor do mesário: ")
-        cpf = input("Digite os 4 primeiros dígitos do CPF do mesário: ")
-        chave = input("Digite a chave de acesso do mesário: ").upper().strip()  # Converte para maiúsculas e remove espaços extras
-        
-        while not verificar_mesario(titulo, cpf, chave):
-            print("Mesário não identificado. Por favor, tente novamente.")
-            N=input("Deseja tentar novamente? (S/N): ")
-            if N == 'N' or N == 'n':
-                print("Retornando ao menu do sistema de votação...")
-                sistema_votacao()
-            titulo= input("Digite o número do título de eleitor do mesário: ")
-            cpf = input("Digite os 4 primeiros dígitos do CPF do mesário: ")
-            chave = input("Digite a chave de acesso do mesário: ").upper().strip()  # Converte para maiúsculas e remove espaços extras
-
-
-        print("Mesário identificado com sucesso!")
-        input("Pressione Enter para realizar a Zerezima")
-
-        while not zerezima():
-                print("Erro ao realizar a Zerezima. Por favor, tente novamente.")
-                input("Pressione Enter para realizar a Zerezima")
-        print("Zerezima realizada com sucesso!")
-
-        votacao= input("Deseja continuar o processo de votação? (S/N): ")
-        if votacao == 'S' or votacao == 's':
-            menu_votacao()
-
-        elif votacao == 'N' or votacao == 'n':
-            print("retornando para menu do sistema de votação...")
-            sistema_votacao()
-
-        while votacao != 'S' and votacao != 'N' and votacao != 's' and votacao != 'n':
-            print("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.")
-            votacao = input("Deseja continuar o processo de votação? (S/N): ")
-
-            
 def menu_votacao():
     os.system('clear')  # Limpa a tela para melhor visualização
     print("\n== MENU DE OPERAÇÃO DA URNA ==")

@@ -1,5 +1,5 @@
 
-import conexao  
+from conexao import conectar
 from Criptografia import decifrar
 
 
