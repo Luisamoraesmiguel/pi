@@ -130,6 +130,7 @@ def edicao():
 def busca():
     print("\n== Busca ==")
     print("1- Pesquisar")
+    print("2- Listar")
     print("0- Voltar")
     
 
@@ -141,6 +142,7 @@ def busca():
         dado=input("Digite o CPF (sem espaços) ou o Título: ")
         resultado = buscar.buscar_eleitor(dado)
         print(resultado)
+    elif(i==2):
 
 
 
