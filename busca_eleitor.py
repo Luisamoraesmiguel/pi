@@ -33,6 +33,7 @@ def buscar_eleitor(dado):
         print("="*30)
         print(f"NOME:    {resultado['nome']}")
         print(f"TÍTULO:  {resultado['titulo']}")
+        print(f"CPF:     {Criptografia.decifrar(resultado['cpf'])}")
         print(f"MESÁRIO: {'SIM' if resultado['mesario'] else 'NÃO'}")
         print("="*30 + "\n")
     else:
