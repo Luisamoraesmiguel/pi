@@ -42,8 +42,7 @@ def gerenciamento():
     print("\n== GERENCIAMENTO ==")
     print("\n1- Cadastro")
     print("2- Edição")
-    print("3- Busca")
-    print("4- Listar")
+    print("3- Listar")
     print("0- Voltar")
 
     i=int(input("\nEscolha a Opção Desejada: "))
@@ -54,9 +53,8 @@ def gerenciamento():
     elif(i==2):
         edicao()
     elif(i==3):
-        busca()
-    elif(i==4):
         listar()
+
     
     elif(i==0):
         principal()
@@ -90,7 +88,8 @@ def edicao():
     print("1- Remover Eleitor")
     print("2- Editar Eleitor")
     print("3- Editar Candidato")
-    print("4- Rever Chave de Acesso")
+    print("4- Buscar Eleitor")
+    print("5- Rever Chave de Acesso")
     i=int(input("\nEscolha a Opção Desejada: "))
 
     if(i==0):
@@ -114,8 +113,9 @@ def edicao():
     
     elif(i==3):
         editar_candidato()
-    
     elif(i==4):
+        busca()
+    elif(i==5):
         rever_chave_acesso()
     
 
@@ -131,12 +131,12 @@ def busca():
     i=int(input("Escolha a Opção Desejada: "))
 
     if(i==0):
-        gerenciamento()
+        edicao()
     elif(i==1):
         dado=input("Digite o CPF (sem espaços) ou o Título: ")
         resultado = buscar.buscar_eleitor(dado)
         print(resultado)
-    elif(i==2):
+    #elif(i==2):
 
 
 
