@@ -49,24 +49,24 @@ def main():
         for q in [q.strip() for q in sql_text.split(";") if q.strip()]:
             try:
                 rows = run_query(cursor, q)
-                print(f"--- RESULTADO DA QUERY ---\n{q}\n{rows}\n")
+                print(f"\n--- RESULTADO DA QUERY ---\n{q}\n{rows}\n")
             except Exception as e:
-                print(f"Erro ao executar query: {e}\nQuery: {q}\n")
+                print(f"\nErro ao executar query: {e}\nQuery: {q}\n")
 
         cursor.execute("SELECT COUNT(*) AS total_registros_votos FROM votos")
         total_votos = cursor.fetchone()["total_registros_votos"]
         cursor.execute("SELECT SUM(CASE WHEN status = 'Ja Votou' THEN 1 ELSE 0 END) AS ja_votaram FROM eleitores")
         ja_votaram = cursor.fetchone()["ja_votaram"] or 0
-        print(f"Total registros na tabela votos: {total_votos}")
+        print(f"\nTotal registros na tabela votos: {total_votos}")
         print(f"Total eleitores com status 'Ja Votou': {ja_votaram}")
         if total_votos == ja_votaram:
-            print("VALIDACAO_INTEGRIDADE: OK - números coincidem.")
+            print("\nVALIDACAO_INTEGRIDADE: OK - números coincidem.")
         else:
-            print("VALIDACAO_INTEGRIDADE: FALHA - discrepância encontrada.")
+            print("\nVALIDACAO_INTEGRIDADE: FALHA - discrepância encontrada.")
 
         logs = ler_listas_log(config.LOG_FILE_PATH)
         found = validar_logs(logs)
-        print("Validação de logs (presença das mensagens obrigatórias):")
+        print("\nValidação de logs (presença das mensagens obrigatórias):")
         for k, v in found.items():
             print(f"{k}: {'ENCONTRADO' if v else 'NAO_ENCONTRADO'}")
 
@@ -78,12 +78,12 @@ def main():
                 continue
             try:
                 plain = Criptografia.decrypt_hill(ctext, config.HILL_KEY_MATRIX)
-                print(f"PROTOCOLO_CIFRADO: {ctext} -> DECIFRADO (ex.): {plain}")
+                print(f"\nPROTOCOLO_CIFRADO: {ctext} -> DECIFRADO (ex.): {plain}")
             except Exception as e:
                 print(f"Não foi possível decifrar protocolo {ctext}: {e}")
 #se o error nao tiver pronto ainda, colocar dps (o msm do import)
     except mysql.connector.Error as e:
-        print(f"Erro de conexão com banco MySQL: {e}")
+        print(f"\nErro de conexão com banco MySQL: {e}")
     finally:
         try:
             cursor.close()
