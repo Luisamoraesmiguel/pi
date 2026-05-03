@@ -1,5 +1,4 @@
 from conexao import conectar
-import mysql.connector
 
 def apagar_eleitor_do_banco(titulo_digitado):
         

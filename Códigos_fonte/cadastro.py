@@ -47,8 +47,8 @@ def cadastrar_eleitor():
 
 
 def cadastrar_candidato():
-    nome = input("Digite o nome do candidato: ")
-    partido = input("Digite o partido do candidato: ")
+    nome = input("Digite o nome do candidato: ").upper().strip() #.upper() para garantir que o nome seja armazenado em maiúsculas strip() para remover espaços extras   
+    partido = input("Digite o partido do candidato: ").upper().strip()
     numero = input("Digite o número do candidato: ")
 
     while not numero.isdigit():
@@ -58,7 +58,7 @@ def cadastrar_candidato():
     conexao = conectar()
     cursor = conexao.cursor()
 
-    cursor.execute("SELECT numero FROM candidatos WHERE numero = %s", (numero,))
+    cursor.execute("SELECT num_votacao FROM candidatos WHERE num_votacao = %s", (numero,)) # , para passar o número como tupla
     if cursor.fetchone() is not None:
         print("Número de candidato já existe. Tente novamente.")
         cursor.close()
@@ -66,7 +66,7 @@ def cadastrar_candidato():
         return
 
 
-    sql = 'INSERT INTO candidatos ( nome, partido, numero) VALUES (%s, %s, %s)'
+    sql = 'INSERT INTO candidatos ( nome, partido, num_votacao) VALUES (%s, %s, %s)'
     valores = (nome, partido, numero)
     cursor.execute(sql, valores)
     conexao.commit()

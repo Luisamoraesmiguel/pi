@@ -8,6 +8,7 @@ from Códigos_fonte.cadastro import cadastrar_eleitor
 from Votacao.Abertura import abertura_votacao
 import busca_eleitor as buscar
 from Códigos_fonte.edicao.lista import listar_eleitores
+from Códigos_fonte.edicao.lista import listar_candidatos
 import time
 import os # para limpar a tela, se necessário
 #import random
@@ -54,13 +55,13 @@ def gerenciamento():
     elif(i==2):
         edicao()
     elif(i==3):
-        listar_eleitores()
+        lista()
 
-    
     elif(i==0):
         principal()
     return i
     
+
 
 def cadastro():
     print("\n== CADASTRO ==")
@@ -120,13 +121,24 @@ def edicao():
         rever_chave_acesso()
 
     
+def lista():
+    print("\n1- Listar Eleitores")
+    print("2- Listar Candidatos")
+    print("0- Voltar")
+    i=int(input("\nEscolha a Opção Desejada: "))
+    if(i==0):
+        edicao()
+    elif(i==1):
+        listar_eleitores()
+    elif(i==2):
+        listar_candidatos() 
 
 
 def busca():
     print("\n== Busca ==")
     print("\n1- Pesquisar")
-    print("2- Listar")
-    print("0- Voltar")
+    print("\n2- Listar")
+    print("\n0- Voltar")
     
 
     i=int(input("Escolha a Opção Desejada: "))
@@ -141,15 +153,6 @@ def busca():
         listar_eleitores()
 
 
-
-def listar():
-    print("\n== LISTAR ==")
-    print("\n0- Voltar")
-
-    i=int(input("\nEscolha a Opção Desejada: "))
-
-    if(i==0):
-        gerenciamento()
 
 
 def sistema_votacao():
