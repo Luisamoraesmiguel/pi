@@ -8,6 +8,7 @@ from Códigos_fonte.cadastro import cadastrar_eleitor
 from Votacao.Abertura import abertura_votacao
 from Votacao import processo_votacao
 from Códigos_fonte.edicao.busca_eleitor import buscar_eleitor as buscar
+from Códigos_fonte.edicao.busca_eleitor import busca_candidato as buscac
 from Códigos_fonte.edicao.lista import listar_eleitores
 from Códigos_fonte.edicao.lista import listar_candidatos
 import time
@@ -92,7 +93,8 @@ def edicao():
     print("2- Editar Eleitor")
     print("3- Editar Candidato")
     print("4- Buscar Eleitor")
-    print("5- Rever Chave de Acesso")
+    print("5- Buscar Candidato")
+    print("6- Rever Chave de Acesso")
     i=int(input("\nEscolha a Opção Desejada: "))
 
     if(i==0):
@@ -119,6 +121,8 @@ def edicao():
     elif(i==4):
         busca()
     elif(i==5):
+        buscac()
+    elif(i==6):
         rever_chave_acesso()
 
     
