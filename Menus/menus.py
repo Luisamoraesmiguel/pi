@@ -7,7 +7,7 @@ from Códigos_fonte.edicao.rever_chave import rever_chave_acesso
 from Códigos_fonte.cadastro import cadastrar_eleitor
 from Votacao.Abertura import abertura_votacao
 from Votacao import processo_votacao
-import Códigos_fonte.edicao.busca_eleitor as buscar
+import busca_eleitor as buscar
 from Códigos_fonte.edicao.lista import listar_eleitores
 from Códigos_fonte.edicao.lista import listar_candidatos
 import time
