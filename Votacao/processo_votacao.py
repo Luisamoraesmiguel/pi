@@ -1,6 +1,6 @@
 import os
 import time
-from busca_eleitor import buscar_eleitor
+from Códigos_fonte.edicao.busca_eleitor import buscar_eleitor as busca
 from Códigos_fonte.validacoes import mesario
 from Votacao import registrar_voto
 
@@ -14,7 +14,7 @@ def realizar_fluxo_votacao():
     c4 = input("4 primeiros dígitos do CPF: ")
     ch = input("Chave de Acesso: ").upper().strip()
 
-    eleitor = mesario.validar_identidade_eleitor(t, c4, ch)
+    eleitor = mesario.verificar_mesario(t, c4, ch)
 
     if eleitor == "INVALIDO":
         print("\n[ERRO] Credenciais incorretas.")
@@ -35,7 +35,7 @@ def processar_escolha_candidato(titulo_eleitor, nome_eleitor):
 
     while voto_finalizado == False:
         numero = input("\nDigite o número do candidato: ")
-        candidato = busca_eleitor(numero)
+        candidato = busca(numero)
 
         if candidato:
             print(f"CANDIDATO: {candidato['nome']} | PARTIDO: {candidato['partido']}")

@@ -15,7 +15,7 @@ def verificar_mesario(titulo, cpf_4digitos, chave):
         print("\n[ERRO] Título ou chave de acesso incorretos. Tente novamente.")
         cursor.close()
         conexao.close()
-        return False
+        return "INVALIDO"
     
     cpf, mesario = resultado
 
@@ -23,7 +23,7 @@ def verificar_mesario(titulo, cpf_4digitos, chave):
         print("\n[ERRO] O eleitor com este título não é um mesário. Tente novamente.")
         cursor.close()
         conexao.close()
-        return False
+        return "INVALIDO"
     
     cpf_decifrado = decifrar(cpf)
    
@@ -39,10 +39,10 @@ def verificar_mesario(titulo, cpf_4digitos, chave):
     if cpf_str[:4] == cpf_4digitos:
         cursor.close()
         conexao.close()
-        return True
+        return {"nome": titulo} # Retorna um dicionário com o nome do mesário (pode ser expandido para incluir mais informações, se necessário)
     else:
         print("\n[ERRO] CPF incorreto. Tente novamente.")
         cursor.close()
         conexao.close()
-        return False
+        return "CPF_ERRADO"
     

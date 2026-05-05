@@ -11,7 +11,7 @@ def abertura_votacao():
     cpf = input("Digite os 4 primeiros dígitos do CPF do mesário: ")
     chave = input("Digite a chave de acesso do mesário: ").upper().strip()
 
-    while not verificar_mesario(titulo, cpf, chave):
+    while verificar_mesario(titulo, cpf, chave) == "INVALIDO":
         print("Mesário não identificado. Por favor, tente novamente.")
         N = input("Deseja tentar novamente? (S/N): ")
         if N == 'N' or N == 'n':
@@ -28,3 +28,6 @@ def abertura_votacao():
         print("\nErro ao realizar a Zerezima. Por favor, tente novamente.")
         input("Pressione Enter para realizar a Zerezima")
     print("\nZerezima realizada com sucesso!")
+
+    from Votacao.processo_votacao import realizar_fluxo_votacao
+    realizar_fluxo_votacao()
