@@ -1,6 +1,6 @@
 import os
 import time
-from busca_eleitor import busca_eleitor
+from busca_eleitor import buscar_eleitor
 from Códigos_fonte.validacoes import mesario
 from Votacao import registrar_voto
 
