@@ -3,6 +3,7 @@ import time
 from Códigos_fonte.edicao.busca_eleitor import buscar_candidato as busca
 from Códigos_fonte.validacoes import mesario
 from Votacao import registrar_voto
+from Votacao.log import registrar_log
 
 def realizar_fluxo_votacao():
 
@@ -18,13 +19,18 @@ def realizar_fluxo_votacao():
 
     if eleitor == "INVALIDO":
         print("\n[ERRO] Credenciais incorretas.")
+        registrar_log("ALERTA: Tentativa de acesso negado - credenciais invalidas")
+    
     elif eleitor == "JA_VOTOU":
         print("\n[ERRO] Este eleitor já realizou o voto anteriormente.")
+        registrar_log("ALERTA: Tentativa de voto duplo")
     elif eleitor == "CPF_ERRADO":
         print("\n[ERRO] CPF não confere.")
+        registrar_log("ALERTA: Tentativa de voto com CPF incorreto")
     else:
         # Eleitor validado com sucesso!
         processar_escolha_candidato(t, eleitor['nome'])
+        registrar_log("SUCESSO: Voto realizado com sucesso.")
 
 
 def processar_escolha_candidato(titulo_eleitor, nome_eleitor):

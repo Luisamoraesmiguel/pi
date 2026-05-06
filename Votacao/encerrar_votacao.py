@@ -32,7 +32,10 @@ def executar_encerramento_logica():
                 print("\n--- RESULTADOS CONSOLIDADOS ---")
                 for nome, total in resultados:
                     print(f"Candidato: {nome} | Votos: {total}")
-                
+                    
+                    from log import registrar_log
+                    registrar_log(f"ENCERRAMENTO: Votação finalizada com sucesso! ")
+
                 cursor.close()
                 conn.close()
                 return True

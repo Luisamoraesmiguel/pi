@@ -1,6 +1,7 @@
 import os
 from Códigos_fonte.validacoes.mesario import verificar_mesario
 from Códigos_fonte.zerezima import zerezima
+from Votacao.log import registrar_log
 
 def abertura_votacao():
     os.system('clear')
@@ -28,6 +29,7 @@ def abertura_votacao():
         print("\nErro ao realizar a Zerezima. Por favor, tente novamente.")
         input("Pressione Enter para realizar a Zerezima")
     print("\nZerezima realizada com sucesso!")
+    registrar_log("ABERTURA: Votação iniciada pelo mesário com título de eleitor " + titulo + "Total de votos zerados: " + str(zerezima.contagem))
 
     from Votacao.processo_votacao import realizar_fluxo_votacao
     

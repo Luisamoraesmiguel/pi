@@ -254,7 +254,13 @@ def auditoria():
 
     if(i==0):
         sistema_votacao()
-
+    elif(i==1):
+        print("\n== LOG DE OCORRÊNCIA ==")
+        from log import exibir_log
+        exibir_log()
+        input("\nPressione Enter para voltar...")
+        auditoria()
+    elif(i==2):
 
 def resultado():
     print("\n== RESULTADO ==")
