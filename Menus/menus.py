@@ -6,13 +6,13 @@ from Códigos_fonte.cadastro import cadastrar_candidato
 from Códigos_fonte.edicao.rever_chave import rever_chave_acesso
 from Códigos_fonte.cadastro import cadastrar_eleitor
 from Votacao.Abertura import abertura_votacao
-from Votacao import processo_votacao
-from Códigos_fonte.edicao.busca_eleitor import buscar_eleitor as buscar
-from Códigos_fonte.edicao.busca_eleitor import busca_candidato as buscac
-from Códigos_fonte.edicao.lista import listar_eleitores
-from Códigos_fonte.edicao.lista import listar_candidatos
+from Criptografia import cifrar
+import busca_eleitor as buscar
 import time
-import os # para limpar a tela, se necessário
+import os 
+import random
+import string
+# para limpar a tela, se necessário
 #import random
 #add import do menu do banco de dados, quando for criado
 #from validacoes import titulo
@@ -57,13 +57,13 @@ def gerenciamento():
     elif(i==2):
         edicao()
     elif(i==3):
-        lista()
+        listar()
 
+    
     elif(i==0):
         principal()
     return i
     
-
 
 def cadastro():
     print("\n== CADASTRO ==")
@@ -93,8 +93,7 @@ def edicao():
     print("2- Editar Eleitor")
     print("3- Editar Candidato")
     print("4- Buscar Eleitor")
-    print("5- Buscar Candidato")
-    print("6- Rever Chave de Acesso")
+    print("5- Rever Chave de Acesso")
     i=int(input("\nEscolha a Opção Desejada: "))
 
     if(i==0):
@@ -121,29 +120,34 @@ def edicao():
     elif(i==4):
         busca()
     elif(i==5):
-        buscac()
-    elif(i==6):
         rever_chave_acesso()
 
     
-def lista():
-    print("\n1- Listar Eleitores")
-    print("2- Listar Candidatos")
-    print("0- Voltar")
-    i=int(input("\nEscolha a Opção Desejada: "))
-    if(i==0):
-        edicao()
-    elif(i==1):
-        listar_eleitores()
-    elif(i==2):
-        listar_candidatos() 
+def listar_eleitores():
+    from conexao import conectar
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("SELECT nome, titulo, mesario FROM eleitores")
+    eleitores = cursor.fetchall()
+    cursor.close()
+    conexao.close()
+
+    if not eleitores:
+        print("Nenhum eleitor cadastrado.")
+    else:
+        print("\n== LISTA DE ELEITORES ==")
+        for e in eleitores:
+            print(f"Nome: {e[0]} | Título: {e[1]} | Mesário: {e[2]}")
+    
+    input("\nPressione Enter para voltar...")
+    busca()
 
 
 def busca():
     print("\n== Busca ==")
     print("\n1- Pesquisar")
-    print("\n2- Listar")
-    print("\n0- Voltar")
+    print("2- Listar")
+    print("0- Voltar")
     
 
     i=int(input("Escolha a Opção Desejada: "))
@@ -158,6 +162,15 @@ def busca():
         listar_eleitores()
 
 
+
+def listar():
+    print("\n== LISTAR ==")
+    print("\n0- Voltar")
+
+    i=int(input("\nEscolha a Opção Desejada: "))
+
+    if(i==0):
+        gerenciamento()
 
 
 def sistema_votacao():
@@ -206,12 +219,21 @@ def menu_votacao():
     
 
 def votacao():
-    processo_votacao.realizar_fluxo_votacao()
-    menu_votacao() # Volta para o menu de votação após concluir um voto
+    print("\n== VOTAÇÃO ==")
+    print("\n1- Votar")
+    pass
 
 def encerramento_votacao():
+    letras = ''.join(random.choices(string.ascii_uppercase, k=2))
+    digitos = ''.join(random.choices(string.digits, k=5))
+    protocolo_original = f"V{letras}2600{digitos}"
+    protocolo_cifrado = cifrar(protocolo_original)
+
+    print(f"\nProtocolo de Encerramento: {protocolo_original}")
+    print(f"Protocolo cifrado: {protocolo_cifrado}")
+
     print("\nEncerrando a votação...")
-    time.sleep(2)  
+    time.sleep(2)
     print("\nVotação encerrada com sucesso!")
     input("Pressione Enter para retornar ao menu do sistema de votação.")
     sistema_votacao()
@@ -242,3 +264,14 @@ def resultado():
 
 if __name__ == "__main__":
     principal()
+
+def menu_encerrar_sistema():
+    from Votacao.encerrar_votacao import executar_encerramento_logica
+    
+    sucesso = executar_encerramento_logica()
+    
+    if sucesso:
+        print("Sistema finalizado.")
+        exit()
+    else:
+        return
