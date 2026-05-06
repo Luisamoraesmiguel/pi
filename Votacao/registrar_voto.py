@@ -23,7 +23,7 @@ def gravar_voto_no_banco(numero_escolhido, titulo_eleitor):
     protocolo_cifrado = cifrar(protocolo_original)
     print(f"\nSeu protocolo de votação: {protocolo_original}") 
     
-    comando_sql = "INSERT INTO votos (numero_candidato, data_hora_voto, protocolo) VALUES (%s, %s, %s)"
+    comando_sql = "INSERT INTO votos (Candidato, Datahora, protocolo_votacao) VALUES (%s, %s, %s)"
     cursor.execute(comando_sql, (numero_escolhido, data_hora_voto, protocolo_cifrado))
 
     sql_status = "UPDATE eleitores SET votou = 'S' WHERE titulo = %s"
@@ -31,9 +31,9 @@ def gravar_voto_no_banco(numero_escolhido, titulo_eleitor):
     
     conexao.commit()
     print("\nSucesso: Voto registrado!")
-    print(f"Protocolo: {protocolo_limpo} - Candidato: {numero_escolhido}")
+    print(f"Protocolo: {protocolo_original} - Candidato: {numero_escolhido}")
 
     cursor.close()
     conexao.close()
 
-    return protocolo_limpo
+    return protocolo_original

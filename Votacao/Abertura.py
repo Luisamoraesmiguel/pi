@@ -30,4 +30,12 @@ def abertura_votacao():
     print("\nZerezima realizada com sucesso!")
 
     from Votacao.processo_votacao import realizar_fluxo_votacao
-    realizar_fluxo_votacao()
+    
+    continuar = True
+    while continuar:
+         realizar_fluxo_votacao()
+         resposta = input("\nDeseja realizar outro voto? (S/N): ").upper().strip()
+         if resposta == 'N':
+            continuar = False
+            print("Encerrando o sistema de votação. Obrigado!")
+   

@@ -1,6 +1,6 @@
 import os
 import time
-from Códigos_fonte.edicao.busca_eleitor import busca_candidato as busca
+from Códigos_fonte.edicao.busca_eleitor import buscar_candidato as busca
 from Códigos_fonte.validacoes import mesario
 from Votacao import registrar_voto
 
@@ -48,7 +48,7 @@ def processar_escolha_candidato(titulo_eleitor, nome_eleitor):
         
         if confirmar == "S":
             # RF002.01.06.07, 08 e 09: Grava e mostra protocolo
-            protocolo = registrar_voto.gravar_voto_no_banco(numero, titulo_eleitor)
+            protocolo = registrar_voto.gravar_voto_no_banco(candidato['id'], titulo_eleitor)
             
             print("\n" + "*"*40)
             print("          VOTO CONFIRMADO!")

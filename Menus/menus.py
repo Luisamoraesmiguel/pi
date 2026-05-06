@@ -7,7 +7,8 @@ from Códigos_fonte.edicao.rever_chave import rever_chave_acesso
 from Códigos_fonte.cadastro import cadastrar_eleitor
 from Votacao.Abertura import abertura_votacao
 from Criptografia import cifrar
-import busca_eleitor as buscar
+from Códigos_fonte.edicao.busca_eleitor import buscar_eleitor as buscar
+from Códigos_fonte.edicao.busca_eleitor import buscar_candidato
 import time
 import os 
 import random
@@ -93,7 +94,8 @@ def edicao():
     print("2- Editar Eleitor")
     print("3- Editar Candidato")
     print("4- Buscar Eleitor")
-    print("5- Rever Chave de Acesso")
+    print("5- Buscar Candidato")
+    print("6- Rever Chave de Acesso")
     i=int(input("\nEscolha a Opção Desejada: "))
 
     if(i==0):
@@ -120,6 +122,8 @@ def edicao():
     elif(i==4):
         busca()
     elif(i==5):
+        buscar_candidato()
+    elif(i==6):
         rever_chave_acesso()
 
     
@@ -221,7 +225,7 @@ def menu_votacao():
 def votacao():
     print("\n== VOTAÇÃO ==")
     print("\n1- Votar")
-    pass
+    print("0- Voltar")
 
 def encerramento_votacao():
     letras = ''.join(random.choices(string.ascii_uppercase, k=2))
