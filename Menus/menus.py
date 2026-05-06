@@ -261,6 +261,7 @@ def auditoria():
         input("\nPressione Enter para voltar...")
         auditoria()
     elif(i==2):
+        pass
 
 def resultado():
     print("\n== RESULTADO ==")
