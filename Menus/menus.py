@@ -1,19 +1,14 @@
-
 from Códigos_fonte.edicao.remover_eleitor import apagar_eleitor_do_banco as remover_eleitor
 from Códigos_fonte.edicao.eleitor import editar_eleitor
 from Códigos_fonte.edicao.candidato import editar_candidato
-from Códigos_fonte.cadastro import cadastrar_candidato
 from Códigos_fonte.edicao.rever_chave import rever_chave_acesso
-from Códigos_fonte.cadastro import cadastrar_eleitor
+from Códigos_fonte.edicao.busca_eleitor import buscar_eleitor as buscar, buscar_candidato
+from Códigos_fonte.cadastro import cadastrar_candidato, cadastrar_eleitor
 from Votacao.Abertura import abertura_votacao
 from Criptografia import cifrar
-from Códigos_fonte.edicao.busca_eleitor import buscar_eleitor as buscar
-from Códigos_fonte.edicao.busca_eleitor import buscar_candidato
-from Resultado.vts_partido import votos_por_partido 
+from Resultado.vts_partido import votos_por_partido
 from Resultado.boletim import boletim_da_urna
-import os 
-import random
-import string
+import os, random, string
 # para limpar a tela, se necessário
 #import random
 #add import do menu do banco de dados, quando for criado
