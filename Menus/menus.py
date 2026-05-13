@@ -161,11 +161,7 @@ def busca():
     elif(i==1):
         dado=input("Digite o CPF (sem espaços) ou o Título: ")
         resultado = buscar(dado)
-<<<<<<< HEAD
         print(resultado)
-=======
-        print(resultado)
->>>>>>> 2da6437a0b60280bbfe3a49a0aa75ca038c6173c
     elif(i==2):
         listar_eleitores()
 
