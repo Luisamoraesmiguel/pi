@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 [2026-05-06 10:49:58] ALERTA: Tentativa de acesso negado - credenciais invalidas
 [2026-05-06 10:51:32] SUCESSO: Voto realizado com sucesso.
 [2026-05-06 10:52:32] ALERTA: Tentativa de acesso negado - credenciais invalidas
+=======
+[REGISTRO]: 1, 99, datetime.datetime2026, 4, 22, 17, 34, 52
+[REGISTRO]: 2, 99, datetime.datetime2026, 4, 22, 17, 36, 11
+>>>>>>> 2da6437a0b60280bbfe3a49a0aa75ca038c6173c
