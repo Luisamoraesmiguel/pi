@@ -4,7 +4,7 @@ from Códigos_fonte.zerezima import zerezima
 from Votacao.log import registrar_log
 
 def abertura_votacao():
-    os.system('clear')
+    os.system('cls')
     print("\n== ABERTURA DO SISTEMA DE VOTAÇÃO ==")
 
     print("\n IDENTIFICAÇÃO DO MESÁRIO")

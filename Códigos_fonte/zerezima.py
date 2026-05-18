@@ -3,7 +3,7 @@ import os
 import mysql.connector
 
 def zerezima():
-    os.system('clear')  
+    os.system('cls')  
     print("\n== ZEREZIMA ==")
 
 

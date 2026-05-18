@@ -22,6 +22,7 @@ import os, random, string
  
 
 def principal():
+    os.system('cls')
     print("\n== MENU PRINCIPAL ==")
     print("\n1- Gerenciamento")
     print("2- Votação")
@@ -40,6 +41,7 @@ def principal():
     
 
 def gerenciamento():
+    os.system('cls')
     print("\n== GERENCIAMENTO ==")
     print("\n1- Cadastro")
     print("2- Edição")
@@ -63,6 +65,7 @@ def gerenciamento():
     
 
 def cadastro():
+    os.system('cls')
     print("\n== CADASTRO ==")
     print("\n0- Voltar")
     print("1- Cadastrar Eleitor")
@@ -84,6 +87,7 @@ def cadastro():
     
 
 def edicao():
+    os.system('cls')
     print("\n== EDIÇÃO ==")
     print("\n0- Voltar")
     print("1- Remover Eleitor")
@@ -144,6 +148,7 @@ def listar_eleitores():
 
 
 def busca():
+    os.system('cls')
     print("\n== Busca ==")
     print("\n1- Pesquisar")
     print("2- Listar")
@@ -164,6 +169,7 @@ def busca():
 
 
 def listar():
+    os.system('cls')
     print("\n== LISTAR ==")
     print("\n0- Voltar")
 
@@ -174,6 +180,7 @@ def listar():
 
 
 def sistema_votacao():
+    os.system('cls')
     print("\n== SISTEMA DE VOTAÇÃO ==")
     print("\n1- Abertura da Votação")
     print("2- Auditoria")
@@ -197,7 +204,7 @@ def sistema_votacao():
 
 
 def menu_votacao():
-    os.system('clear')  # Limpa a tela para melhor visualização
+    os.system('cls')  # Limpa a tela para melhor visualização
     print("\n== MENU DE OPERAÇÃO DA URNA ==")
     print("\n1- Votar")
     print("2- Encerrar Votação")
@@ -219,6 +226,7 @@ def menu_votacao():
     
 
 def votacao():
+    os.system('cls')
     print("\n== VOTAÇÃO ==")
     print("\n1- Votar")
     print("2- Encerrar Votação")
@@ -253,6 +261,7 @@ def encerramento_votacao():
 
 
 def auditoria():
+    os.system('cls')
     print("\n== AUDITORIA ==")
     print("\n1- Log de Ocorrência")
     print("2- Protocolo")
@@ -273,6 +282,7 @@ def auditoria():
         pass
 
 def resultado():
+    os.system('cls')
     print("\n== RESULTADO ==")
     print("\n1- Boletim de Urna")
     print("2- Resultado Final")
@@ -297,6 +307,7 @@ def resultado():
 
 
 def menu_encerrar_sistema():
+    os.system('cls')
     from Votacao.encerrar_votacao import executar_encerramento_logica
     
     sucesso = executar_encerramento_logica()
