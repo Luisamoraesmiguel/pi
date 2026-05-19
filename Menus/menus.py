@@ -8,7 +8,8 @@ from Votacao.Abertura import abertura_votacao
 from Criptografia import cifrar
 from Resultado.vts_partido import votos_por_partido
 from Resultado.boletim import boletim_da_urna
-import os, random, string
+from Resultado.validar_integridade import relatorio_integridade
+import os, random, string, time
 # para limpar a tela, se necessário
 #import random
 #add import do menu do banco de dados, quando for criado
@@ -303,6 +304,8 @@ def resultado():
 
     elif(i==3):
         votos_por_partido()
+    elif(i==6):
+        relatorio_integridade()
 
 
 
