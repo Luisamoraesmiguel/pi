@@ -1,7 +1,7 @@
 import os
 import time
 from Códigos_fonte.edicao.busca_eleitor import buscar_candidato as busca
-from Códigos_fonte.validacoes import mesario
+from Códigos_fonte.validacoes import eleitor_validacao
 from Votacao import registrar_voto
 from Votacao.log import registrar_log
 
@@ -15,7 +15,7 @@ def realizar_fluxo_votacao():
     c4 = input("4 primeiros dígitos do CPF: ")
     ch = input("Chave de Acesso: ").upper().strip()
 
-    eleitor = mesario.verificar_mesario(t, c4, ch)
+    eleitor = eleitor_validacao.verificar_eleitor(t, c4, ch)
 
     if eleitor == "INVALIDO":
         print("\n[ERRO] Credenciais incorretas.")
@@ -29,7 +29,7 @@ def realizar_fluxo_votacao():
         registrar_log("ALERTA: Tentativa de voto com CPF incorreto")
     else:
         # Eleitor validado com sucesso!
-        processar_escolha_candidato(t, eleitor['nome'])
+        processar_escolha_candidato(t, eleitor[0])
         registrar_log("SUCESSO: Voto realizado com sucesso.")
 
 
