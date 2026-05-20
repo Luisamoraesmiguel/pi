@@ -1,29 +1,23 @@
 from Códigos_fonte.edicao.remover_eleitor import apagar_eleitor_do_banco as remover_eleitor
 from Códigos_fonte.edicao.eleitor import editar_eleitor
 from Códigos_fonte.edicao.candidato import editar_candidato
-from Códigos_fonte.edicao.lista import listar_eleitores, listar_candidatos
 from Códigos_fonte.edicao.rever_chave import rever_chave_acesso
 from Códigos_fonte.edicao.busca_eleitor import buscar_eleitor as buscar, buscar_candidato
 from Códigos_fonte.cadastro import cadastrar_candidato, cadastrar_eleitor
+from Códigos_fonte.validacoes.cpf import validar_cpf
 from Votacao.Abertura import abertura_votacao
 from Criptografia import cifrar
 from Resultado.vts_partido import votos_por_partido
-from Resultado.vts_candidato import votos_por_candidato
 from Resultado.boletim import boletim_da_urna
-from Resultado.validar_integridade import relatorio_integridade
-from Códigos_fonte.gerador_protocolo import criar_novo_protocolo as gerador_protocolo
-from Resultado.comparecimento import estatistica_comparecimento
-from Resultado.resultado_final import resultado_final
-from Auditoria.protocolos import exibir_protocolos
-import os, random, string, time
-
+import os, random, string
+from Códigos_fonte.validacoes.titulo import verificar_titulo
 
 def principal():
     os.system('cls')
     print("\n== MENU PRINCIPAL ==")
     print("\n1- Gerenciamento")
-    print("\n2- Votação")
-    print("\n0- Sair")
+    print("2- Votação")
+    print("0- Sair")
 
     i=int(input("\nEscolha a Opção Desejada: "))
     
@@ -33,7 +27,6 @@ def principal():
         sistema_votacao()
     elif(i!=0):
         print("A opção escolhida é Inválida\n")
-        principal()
     
     return i
     
@@ -42,9 +35,9 @@ def gerenciamento():
     os.system('cls')
     print("\n== GERENCIAMENTO ==")
     print("\n1- Cadastro")
-    print("\n2- Edição")
-    print("\n3- Listar")
-    print("\n0- Voltar")
+    print("2- Edição")
+    print("3- Listar")
+    print("0- Voltar")
 
     i=int(input("\nEscolha a Opção Desejada: "))
 
@@ -55,11 +48,10 @@ def gerenciamento():
         edicao()
     elif(i==3):
         listar()
+
+    
     elif(i==0):
         principal()
-    else:
-        print("A opção escolhida é Inválida")
-        gerenciamento()
     return i
     
 
@@ -67,8 +59,8 @@ def cadastro():
     os.system('cls')
     print("\n== CADASTRO ==")
     print("\n0- Voltar")
-    print("\n1- Cadastrar Eleitor")
-    print("\n2- Cadastrar Candidato")
+    print("1- Cadastrar Eleitor")
+    print("2- Cadastrar Candidato")
 
     i=int(input("\nEscolha a Opção Desejada: "))
 
@@ -82,21 +74,19 @@ def cadastro():
         cadastrar_candidato()
     
     else:
-        print("A opção escolhida é Inválida")
-        cadastro()
-    return i
+        print("A opção escolhida é Inválida\n")
     
 
 def edicao():
     os.system('cls')
     print("\n== EDIÇÃO ==")
     print("\n0- Voltar")
-    print("\n1- Remover Eleitor")
-    print("\n2- Editar Eleitor")
-    print("\n3- Editar Candidato")
-    print("\n4- Buscar Eleitor")
-    print("\n5- Buscar Candidato")
-    print("\n6- Rever Chave de Acesso")
+    print("1- Remover Eleitor")
+    print("2- Editar Eleitor")
+    print("3- Editar Candidato")
+    print("4- Buscar Eleitor")
+    print("5- Buscar Candidato")
+    print("6- Rever Chave de Acesso")
     i=int(input("\nEscolha a Opção Desejada: "))
 
     if(i==0):
@@ -126,10 +116,6 @@ def edicao():
         buscar_candidato()
     elif(i==6):
         rever_chave_acesso()
-    else:
-        print("A opção escolhida é Inválida")
-        edicao()
-    return i 
 
     
 def listar_eleitores():
@@ -156,8 +142,8 @@ def busca():
     os.system('cls')
     print("\n== Busca ==")
     print("\n1- Pesquisar")
-    print("\n2- Listar")
-    print("\n0- Voltar")
+    print("2- Listar")
+    print("0- Voltar")
     
 
     i=int(input("Escolha a Opção Desejada: "))
@@ -169,40 +155,28 @@ def busca():
         resultado = buscar(dado)
         print(resultado)
     elif(i==2):
-        listar()
-    else:
-        print("A opção escolhida é Inválida")
-        busca()
+        listar_eleitores()
+
 
 
 def listar():
     os.system('cls')
     print("\n== LISTAR ==")
-    print("\n1- Listar Eleitores")
-    print("\n2- Listar Candidatos")
     print("\n0- Voltar")
 
     i=int(input("\nEscolha a Opção Desejada: "))
 
     if(i==0):
         gerenciamento()
-    elif(i==1):
-        listar_eleitores()  
-    elif(i==2):
-        listar_candidatos()
-    else:
-        print("A opção escolhida é Inválida")
-        listar()
-    return i
 
 
 def sistema_votacao():
     os.system('cls')
     print("\n== SISTEMA DE VOTAÇÃO ==")
     print("\n1- Abertura da Votação")
-    print("\n2- Auditoria")
-    print("\n3- Resultado")
-    print("\n0- Voltar")
+    print("2- Auditoria")
+    print("3- Resultado")
+    print("0- Voltar")
 
     i=int(input("\nEscolha a Opção Desejada: "))
 
@@ -215,19 +189,17 @@ def sistema_votacao():
         resultado()
     elif(i==0):
         principal()
-    else:
-        print("A opção escolhida é Inválida")
-        sistema_votacao()
+
     return i
 
 
 
 def menu_votacao():
-    os.system('cls')  
+    os.system('cls')  # Limpa a tela para melhor visualização
     print("\n== MENU DE OPERAÇÃO DA URNA ==")
     print("\n1- Votar")
-    print("\n2- Encerrar Votação")
-    print("\n0- Voltar")
+    print("2- Encerrar Votação")
+    print("0- Voltar")
         
     i=int(input("\nEscolha a Opção Desejada: "))
 
@@ -240,9 +212,6 @@ def menu_votacao():
 
     elif(i==2):
         encerramento_votacao()
-    else:
-        print("A opção escolhida é Inválida\n")
-        menu_votacao()
 
     return i
     
@@ -251,8 +220,8 @@ def votacao():
     os.system('cls')
     print("\n== VOTAÇÃO ==")
     print("\n1- Votar")
-    print("\n2- Encerrar Votação")
-    print("\n0- Voltar")
+    print("2- Encerrar Votação")
+    print("0- Voltar")
 
     i=int(input("\nEscolha a Opção Desejada: "))
     if(i==0):
@@ -270,13 +239,26 @@ def votacao():
 def encerramento_votacao():
     letras = ''.join(random.choices(string.ascii_uppercase, k=2))
     digitos = ''.join(random.choices(string.digits, k=5))
-    protocolo_original = f"V{letras}2600{digitos}"
-    protocolo_cifrado = cifrar(protocolo_original)
+    
+    print("\nEncerramento de votação")
+    nome = input("Digite o nome completo do mesário: ").upper().strip()
+    titulo = ""
+    cpf = ""
 
-    print(f"\nProtocolo de Encerramento: {protocolo_original}")
-    print(f"Protocolo cifrado: {protocolo_cifrado}")
 
-    print("\nEncerrando a votação...")
+    while not validar_cpf(cpf):
+        cpf = input("Digite o CPF do eleitor (apenas números): ")
+        if not validar_cpf(cpf):
+            print("CPF inválido. Por favor, tente novamente.")
+
+    titulo_valido = False
+    while not titulo_valido:
+        titulo = input("Digite o número do título de eleitor: ")
+        if verificar_titulo(titulo):
+            titulo_valido = True
+            print("Título de eleitor válido.")
+        else:
+            print("Título de eleitor inválido. Por favor, tente novamente.")
     time.sleep(2)
     print("\nVotação encerrada com sucesso!")
     input("Pressione Enter para retornar ao menu do sistema de votação.")
@@ -287,14 +269,14 @@ def auditoria():
     os.system('cls')
     print("\n== AUDITORIA ==")
     print("\n1- Log de Ocorrência")
-    print("\n2- Protocolo")
-    #print("3- Exibir Log")
-    print("\n0- Voltar")
+    print("2- Protocolo")
+    print("3- Exibir Log")
+    print("0- Voltar")
 
     i=int(input("\nEscolha a Opção Desejada: "))
 
     if(i==0):
-        principal()
+        sistema_votacao()
     elif(i==1):
         print("\n== LOG DE OCORRÊNCIA ==")
         from Votacao.log import exibir_logs
@@ -302,48 +284,30 @@ def auditoria():
         input("\nPressione Enter para voltar...")
         auditoria()
     elif(i==2):
-        exibir_protocolos()
-        auditoria()
-    else:
-        print("A opção escolhida é Inválida")
-        auditoria()
+        pass
 
 def resultado():
     os.system('cls')
     print("\n== RESULTADO ==")
     print("\n1- Boletim de Urna")
-    print("\n2- Resultado Final")
-    print("\n3- Votos por partido")
-    print("\n4- Votos por candidato")
-    print("\n5- Estatistica de comparecimento")
-    print("\n6- Validação de integridade")
-    print("\n0- Voltar")
+    print("2- Resultado Final")
+    print("3- Votos por partido")
+    print("4- Votos por candidato")
+    print("5- Estatistica de comparecimento")
+    print("6- Validação de integridade")
+    print("0- Voltar")
 
-    i=int(input("\nEscolha a Opção Desejada: "))
+    i=int(input("Escolha a Opção Desejada: "))
 
     if(i==0):
-        principal()
+        sistema_votacao()
     elif(i==1):
         boletim_da_urna()
-        resultado()
     elif(i==2):
-        resultado_final()
-        resultado()
+        pass
+
     elif(i==3):
         votos_por_partido()
-        resultado()
-    elif(i==4):
-        votos_por_candidato()
-        resultado()
-    elif(i==5):
-        estatistica_comparecimento()
-        resultado()
-    elif(i==6):
-        relatorio_integridade()
-        resultado()
-    else:
-        print("A opção escolhida é Inválida")
-        resultado()
 
 
 
@@ -361,6 +325,6 @@ def menu_encerrar_sistema():
     
 
 
-if __name__ == "__main__":
-        opcao = principal()
+if __name__ == "__main__": # Início do programa
+    principal()
 
