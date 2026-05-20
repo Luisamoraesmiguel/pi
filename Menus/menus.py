@@ -300,13 +300,14 @@ def resultado():
     elif(i==1):
         boletim_da_urna()
     elif(i==2):
-        pass
-
+        resultado_final()
     elif(i==3):
         votos_por_partido()
     elif(i==4):
         votos_por_candidato()
         resultado()
+    elif(i==5):
+        estatistica_comparecimento()
     elif(i==6):
         relatorio_integridade()
 
