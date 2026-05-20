@@ -32,14 +32,14 @@ def verificar_mesario(titulo, cpf_4digitos, chave):
     for c in str(cpf_decifrado):
         if c.isdigit():
             cpf_str += c
-    cpf_4digitos = str(cpf_4digitos).strip() # Remove espaços em branco, se houver
+    cpf_4digitos = str(cpf_4digitos).strip() 
 
 
 
     if cpf_str[:4] == cpf_4digitos:
         cursor.close()
         conexao.close()
-        return {"nome": titulo} # Retorna um dicionário com o nome do mesário (pode ser expandido para incluir mais informações, se necessário)
+        return {"nome": titulo} 
     else:
         print("\n[ERRO] CPF incorreto. Tente novamente.")
         cursor.close()
