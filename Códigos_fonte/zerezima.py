@@ -14,6 +14,9 @@ def zerezima():
     cursor.execute(limpar)
     conexao.commit()
 
+    resetar_votacao = "UPDATE eleitores SET votou = N"
+    cursor.execute(resetar_votacao)
+
     relatorio = "SELECT Nome, Num_votacao FROM candidatos"
     cursor.execute(relatorio)
     lista_candidatos = cursor.fetchall() 
