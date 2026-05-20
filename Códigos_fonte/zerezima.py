@@ -19,7 +19,7 @@ def zerezima():
     lista_candidatos = cursor.fetchall() 
     print("Candidatos:")
     for candidato in lista_candidatos:
-        print(f"Candidato: {candidato[0]} | Número: {candidato[1]} | Votos: 0")
+        print(f"\nCandidato: {candidato[0]} | Número: {candidato[1]} | Votos: 0")
     print("\nZerezima realizada com sucesso!")
     
     cursor.close() 
