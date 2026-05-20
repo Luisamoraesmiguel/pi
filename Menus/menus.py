@@ -10,7 +10,7 @@ from Resultado.vts_partido import votos_por_partido
 from Resultado.vts_candidato import votos_por_candidato
 from Resultado.boletim import boletim_da_urna
 from Resultado.validar_integridade import relatorio_integridade
-from Códigos_fonte.validacoes import gerador_protocolo
+from Códigos_fonte.gerador_protocolo import criar_novo_protocolo as gerador_protocolo
 import os, random, string, time
 
 
