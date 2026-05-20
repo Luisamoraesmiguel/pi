@@ -31,7 +31,7 @@ def realizar_fluxo_votacao():
         print("\n[ERRO] CPF não confere.")
         registrar_log("ALERTA: Tentativa de voto com CPF incorreto")
     else:
-        # Eleitor validado com sucesso!
+        
         processar_escolha_candidato(t, eleitor[0])
         registrar_log("SUCESSO: Voto realizado com sucesso.")
 
@@ -51,12 +51,10 @@ def processar_escolha_candidato(titulo_eleitor, nome_eleitor):
         else:
             print("CANDIDATO NÃO ENCONTRADO - VOTO SERÁ NULO.")
             numero = "00"
-
-        # RF002.01.06.06: Opção de confirmar ou não
         confirmar = input("Confirma o voto? (S/N): ").upper().strip()
         
         if confirmar == "S":
-            # RF002.01.06.07, 08 e 09: Grava e mostra protocolo
+            
             protocolo = registrar_voto.gravar_voto_no_banco(candidato['id'], titulo_eleitor)
             
             print("\n" + "*"*40)
@@ -65,8 +63,8 @@ def processar_escolha_candidato(titulo_eleitor, nome_eleitor):
             print("*"*40)
             input("\nPressione Enter para concluir...")
             
-            voto_finalizado = True # Encerra o loop do candidato
+            voto_finalizado = True 
         else:
             print("\nVoltando para a inserção do número...")
-            # O loop continuará pois voto_finalizado ainda é False
+           
 
